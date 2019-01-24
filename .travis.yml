@@ -1,0 +1,12 @@
+sudo: 'required'
+env:
+  secure: "JZO9TKSyCGtOg9dpy3YNRppNNI4RGAkVB3r+QImDtGyliwSz2SV1ASJCiuscR3GugvPxMYtx0eZRONgVfxEGQJl1YLRaCUSOJ5TUHJsEQTIzOJ0f6ewSDfVdYMmlc5pJDcGjPE92b4Rsj5EOoyrg+hTf7++28EQUpv+3fOxmHCA6GbN2yhBgYLqjofuBHywDJYKANpoaqzrGveFT2MHim9YZfPgtLvZRWCMjMTWxhBthCozimAz289fVQcycFX/GNN3PGzBg3fd3LHxxcR8lxmX8JHHRRhG70tk9D3avEYli2vSuQaEAUWIx7AZvN2ZoobIUDZmbK5ErwZse2zs9y3lxlckDpHn9OQthAbiyc4oqQCdrVlsjafpymZeQZ0CSM4QXP76uMct/E5NV+Ec0SIGsvO3lMH+QOTAn3Pxsf85LaHa2XKGcCAnnhepPJBHTfAX2lg/aExOZIDT0J0hBjxLn13ox7ANG4EUt1V+ixCtPCREKJfuEl0ySXswg25aE8zcap5EB8Tv+o3sl3/+EWIEDQisUE0owjppiYBGd1aNBhXjPO1v9FoyBjbGri2x/Ekhc+7T1QwUrEn4Wmcns27oI7kZzZzh6Rn0wTJPyGYr+UOr6YMJvKgwMsitxVPFMcNqyPRYFyoBURHZIK/C/s+QkzAxixsUbS11R9Wq0gYI="
+services:
+  - 'docker'
+script:
+  - 'docker build -t gpdocksthings/burry .'
+after_success:
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+      docker push gpdocksthings/burry;
+    fi
