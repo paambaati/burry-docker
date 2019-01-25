@@ -7,7 +7,9 @@ RUN apk add --no-cache git \
 
 WORKDIR $GOPATH/src/github.com/mhausenblas/burry.sh
 RUN go build -ldflags="-s -w"
-RUN mv burry.sh burry
 
-ENTRYPOINT ["./burry"]
+FROM alpine:3.8
+COPY --from=0 /go/src/github.com/mhausenblas/burry.sh/burry.sh /usr/local/bin/burry
+
+ENTRYPOINT ["/usr/local/bin/burry"]
 CMD ["--help"]
