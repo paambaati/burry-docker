@@ -1,14 +1,15 @@
 FROM golang:1-alpine
-LABEL maintainer="me@httgp.com"
 
-ENV GOOS linux
 RUN apk add --no-cache git \
-    && go get -d github.com/mhausenblas/burry.sh
+    && go get -d github.com/mhausenblas/burry.sh \
+    && cd $GOPATH/src/github.com/mhausenblas/burry.sh \
+    && GOOS=linux go build -ldflags="-s -w"
 
 WORKDIR $GOPATH/src/github.com/mhausenblas/burry.sh
 RUN go build -ldflags="-s -w"
 
 FROM alpine:3.8
+LABEL maintainer="me@httgp.com"
 RUN apk update \
     && apk upgrade \
     && apk add --no-cache \
