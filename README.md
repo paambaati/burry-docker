@@ -20,3 +20,7 @@ docker run gpdocksthings/burry -e <zk_host>:2181 -i zk -o restore -t s3 -c s3.am
 ```
 
 Note that if `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` are left out, burry attempts to use the attached IAM profile.
+
+### Debugging
+
+You can use the `LOG_LEVEL` environment variable to change the logging level for burry.
